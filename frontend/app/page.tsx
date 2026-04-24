@@ -29,6 +29,8 @@ const DEALERSHIP_DATA: Record<string, Record<string, string[]>> = {
   },
 }
 
+const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://127.0.0.1:5000"
+
 export default function Home() {
   const [selectedBrand, setSelectedBrand] = useState("Volkswagen")
   const [selectedFile, setSelectedFile] = useState<File | null>(null)
@@ -93,7 +95,7 @@ export default function Home() {
       setError("")
       setResults([])
 
-      const res = await fetch("http://127.0.0.1:5000/generate", { method: "POST", body: formData })
+      const res = await fetch(`${API_URL}/generate`, { method: "POST", body: formData })
       const data = await res.json()
 
       if (!res.ok || data.status !== "success") throw new Error(data.error || "Server error")
@@ -112,7 +114,7 @@ export default function Home() {
   }
 
   const downloadZip = () => {
-    window.open("http://127.0.0.1:5000/download_zip", "_blank")
+    window.open(`${API_URL}/download_zip`, "_blank")
   }
 
   const downloadSingle = (imageUrl: string, dealer: string) => {
