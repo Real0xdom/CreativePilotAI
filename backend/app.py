@@ -53,10 +53,13 @@ def generate():
             dealers_json=dealers_json,
         )
 
+        # Build base URL from the incoming request so it works locally AND on Render
+        base_url = os.environ.get("BACKEND_URL") or f"{request.scheme}://{request.host}"
+
         response_results = [
             {
                 "dealer": dealer,
-                "image": f"http://127.0.0.1:5000/output/{os.path.basename(path)}",
+                "image": f"{base_url}/output/{os.path.basename(path)}",
             }
             for dealer, path in results
         ]
@@ -114,4 +117,5 @@ def download_zip():
 
 if __name__ == "__main__":
     print(f"\nFlask running from: {os.getcwd()}\n")
-    app.run(debug=True, port=5000)
+    port = int(os.environ.get("PORT", 5000))
+    app.run(debug=False, host="0.0.0.0", port=port)
