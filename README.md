@@ -1,6 +1,6 @@
 # CreativePilot AI
 
-A creative automation tool that generates dealer-branded advertising visuals using a background image you upload. The AI automatically adjusts panel placement and logo color based on the image's brightness — no manual design work needed.
+A creative automation tool that generates dealer-branded advertising visuals using a background image you upload. The AI automatically adjusts panel placement and logo color based on the image's brightness no manual design work needed.
 
 Built with a **Next.js** frontend and a **Flask** backend using **Pillow** for image composition.
 
@@ -13,7 +13,7 @@ You upload a background photo (car shoot, lifestyle, etc.), pick a brand and a d
 - Crops and scales your image to the target output size (1080×1080 by default)
 - Pastes the dealer's panel template on top using alpha compositing
 - Analyzes the image brightness and picks either the light or dark version of the logo accordingly
-- Saves the final creative as a PNG and gives you a download link — or a ZIP if you're generating for multiple dealers at once
+- Saves the final creative as a PNG and gives you a download link or a ZIP if you're generating for multiple dealers at once
 
 ---
 
@@ -87,7 +87,7 @@ cd backend
 unzip assets.zip
 ```
 
-Make sure the final path resolves to `backend/assets/Dealership-panels/...` — that's where the code looks.
+Make sure the final path resolves to `backend/assets/Dealership-panels/...` that's where the code looks.
 
 ---
 
@@ -112,7 +112,7 @@ pip install -r requirements.txt
 python app.py
 ```
 
-The Flask server starts at `http://127.0.0.1:5000`. You'll see a message confirming the working directory in the terminal. The `uploads/` and `static/` folders are created automatically on first run — you don't need to do anything.
+The Flask server starts at `http://127.0.0.1:5000`. You'll see a message confirming the working directory in the terminal. The `uploads/` and `static/` folders are created automatically on first run you don't need to do anything.
 
 ---
 
@@ -141,13 +141,13 @@ The app opens at `http://localhost:3000`.
 3. Select a dealer from the list
 4. Upload a background image (JPG or PNG)
 5. Click **Generate Creative**
-6. Preview the output — click the image to download it, or use **Download All (ZIP)** if you generated for multiple dealers
+6. Preview the output click the image to download it, or use **Download All (ZIP)** if you generated for multiple dealers
 
 ---
 
 ## Deploying to Vercel
 
-The **frontend** deploys to Vercel as a standard Next.js app. The **backend** (Flask) needs to run separately since Vercel only handles Node-based runtimes — the simplest free option is **Render**.
+The **frontend** deploys to Vercel as a standard Next.js app. The **backend** (Flask) needs to run separately since Vercel only handles Node-based runtimes the simplest free option is **Render**.
 
 ---
 
@@ -173,9 +173,9 @@ The **frontend** deploys to Vercel as a standard Next.js app. The **backend** (F
    gunicorn
    ```
 
-6. Hit **Create Web Service** — Render gives you a public URL like `https://creativepilot-backend.onrender.com`
+6. Hit **Create Web Service** Render gives you a public URL like `https://creativepilot-backend.onrender.com`
 
-> **Important:** Render's free tier will spin down after 15 minutes of inactivity. The first request after that takes ~30 seconds to wake up. That's fine for demos — just click Generate and wait a moment if it's cold starting.
+> **Important:** Render's free tier will spin down after 15 minutes of inactivity. The first request after that takes ~30 seconds to wake up. That's fine for demos just click Generate and wait a moment if it's cold starting.
 
 ---
 
@@ -199,7 +199,7 @@ const response = await fetch("https://your-render-app.onrender.com/generate", { 
 2. Click **Add New → Project**
 3. Import your repository
 4. Set the **Root Directory** to `frontend`
-5. Vercel will auto-detect it as a Next.js project — leave the build settings as-is
+5. Vercel will auto-detect it as a Next.js project leave the build settings as-is
 6. Click **Deploy**
 
 Your app will be live at something like `https://creativepilot-ai.vercel.app` in about a minute.
@@ -226,20 +226,20 @@ On Vercel, go to **Settings → Environment Variables** and add `NEXT_PUBLIC_API
 
 ## AI Features
 
-**Brightness-based logo selection** — before placing the logo, the backend converts the background image to grayscale and computes the average pixel value. If it's below 128 (darker image), it uses the light-colored logo. Otherwise it uses the dark one. This avoids logos disappearing into the background.
+**Brightness-based logo selection** before placing the logo, the backend converts the background image to grayscale and computes the average pixel value. If it's below 128 (darker image), it uses the light-colored logo. Otherwise it uses the dark one. This avoids logos disappearing into the background.
 
-**Panel placement detection** — the app splits the image into top and bottom thirds, checks the variance (how visually busy each region is), and places the dealer panel in the cleaner, less busy area. This keeps the panel from overlapping the car or the main subject.
+**Panel placement detection** the app splits the image into top and bottom thirds, checks the variance (how visually busy each region is), and places the dealer panel in the cleaner, less busy area. This keeps the panel from overlapping the car or the main subject.
 
-**Center-crop scaling** — when resizing to the target format, the image is scaled up so it fills the frame entirely, then center-cropped. This means no white bars, no stretching — the photo always fills the canvas.
+**Center-crop scaling** when resizing to the target format, the image is scaled up so it fills the frame entirely, then center-cropped. This means no white bars, no stretching the photo always fills the canvas.
 
 ---
 
 ## Dependencies
 
 **Backend**
-- Flask — API server
-- Flask-CORS — handles cross-origin requests from the frontend
-- Pillow — all image operations (resize, crop, paste, brightness analysis)
+- Flask: API server
+- Flask-CORS: handles cross-origin requests from the frontend
+- Pillow: all image operations (resize, crop, paste, brightness analysis)
 
 **Frontend**
 - Next.js 15 with the App Router
